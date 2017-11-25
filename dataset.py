@@ -29,9 +29,9 @@ def create_dataset(dirs, extension=None, process_fn=None):
     dirs = itertools.chain(*(glob.glob(d) for d in dirs))
     dirs = [d for d in dirs if os.path.isdir(d)]
 
-    for d in dirs:
+    for d in sorted(dirs):
         label = os.path.basename(d.rstrip('/'))
-        files = glob.glob(d + "/" + extension)
+        files = sorted(glob.glob(d + "/" + extension))
         if process_fn is None:
             dataset[label].extend(files)
         else:
